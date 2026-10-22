@@ -219,7 +219,7 @@ bar.querySelectorAll('button[data-w]').forEach(function(x){
   x.addEventListener('click',function(){stopTour();glide(+x.dataset.w,750)})
 });
 var seq=[820,390,1440],si=0;
-function next(){if(!touring)return;glide(auto&&si===seq.length-1?cap():seq[si],2400,function(){if(auto&&si>=seq.length-1){reset();stopTour();return}si=(si+1)%seq.length;tid=setTimeout(next,2500)})}
+function next(){if(!touring)return;glide(auto&&si===seq.length-1?cap():seq[si],1200,function(){if(auto&&si>=seq.length-1){reset();stopTour();return}si=(si+1)%seq.length;tid=setTimeout(next,1800)})}
 tb.addEventListener('click',function(){
   if(touring){stopTour();return}
   touring=true;si=0;tb.textContent='■ Stop';tb.setAttribute('aria-label','Stop size tour');next()
