@@ -100,11 +100,15 @@ html.tablet .util a.hm{display:none}
 html.phone .grip{width:22px}
 html.phone .grip i{width:8px;height:90px}
 @media(pointer:coarse){.grip{display:none}}
+/* embed mode (inside an iframe): page height depends only on width, so auto-sizing iframes never feed back and shake */
+html.embed{overflow:hidden}
+html.embed body{padding:12px 0;gap:20px}
+html.embed .bar{position:relative;left:auto;bottom:auto;transform:none;margin:0 auto}
 @media(max-height:700px){body{padding:16px 0 80px}.bar{bottom:10px;padding:6px 10px 6px 20px;font-size:16px;gap:6px}.bar button{min-height:40px;padding-top:0;padding-bottom:0}.bar .w{width:84px}}
 .bar button{flex:none;text-align:center;white-space:nowrap;padding-left:0;padding-right:0}.bar button[data-w="1440"]{width:132px}.bar button[data-w="820"]{width:118px}.bar button[data-w="390"]{width:112px}.bar #tour{width:132px}
 @media(max-width:760px){body{padding:20px 0 120px}.bar{bottom:16px}.bar{width:calc(100% - 16px);flex-wrap:nowrap;gap:2px;padding:6px 6px 6px 10px;font-size:clamp(11px,3.4vw,18px)}.bar button{flex:1 1 auto;min-width:0;padding:8px clamp(4px,1.6vw,14px);min-height:44px;white-space:nowrap}.bar .w{width:4em;min-width:0;flex:none;padding:0}.bar button,.bar button[data-w]{flex:1 1 0;width:auto;min-width:0}.bar #tour{flex:1.2 1 0;padding:8px 2px}}
 </style>
-<script>(function(){var h=document.documentElement;window.__apply=function(w){h.style.setProperty('--u',(w/100)+'px');h.classList.toggle('phone',w<=700);h.classList.toggle('tablet',w>700&&w<=1100)};window.__apply(Math.min(1440,innerWidth))})();
+<script>(function(){var h=document.documentElement;try{if(window.self!==window.top||/[?&]embed=1/.test(location.search))h.classList.add('embed')}catch(e){h.classList.add('embed')}window.__apply=function(w){h.style.setProperty('--u',(w/100)+'px');h.classList.toggle('phone',w<=700);h.classList.toggle('tablet',w>700&&w<=1100)};window.__apply(Math.min(1440,innerWidth))})();
 </script>
 </head>
 <body>
@@ -184,12 +188,14 @@ function mark(w){
     var t=+x.dataset.w;x.classList.toggle('on',t===1440?w>1100:t===820?(w>700&&w<=1100):w<=700)
   })
 }
-var sc=1,coarse=matchMedia('(pointer:coarse)').matches;
+var sc=1,coarse=matchMedia('(pointer:coarse)').matches,embed=document.documentElement.classList.contains('embed'),lastH=0,fitH=0;
 function fit(){
   var cs=getComputedStyle(document.body),w=b.offsetWidth,h=b.offsetHeight;
-  var aw=document.documentElement.clientWidth,ah=innerHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
-  sc=1;if(w>0)sc=Math.min(1,aw/w);if(!coarse&&h>0)sc=Math.min(sc,ah/h);
+  var aw=innerWidth,ah=innerHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+  sc=1;if(w>0)sc=Math.min(1,aw/w);if(embed){var br=document.getElementById('bar');ah-=(br?br.offsetHeight:0)+parseFloat(cs.rowGap||0)}
+  if((!coarse||embed)&&h>0&&ah>60)sc=Math.min(sc,(ah-2)/h);
   b.style.transformOrigin='50% 0';
+  sc=Math.round(sc*1000)/1000;
   if(sc<1){b.style.transform='scale('+sc+')';b.style.marginBottom=(h*(sc-1))+'px';b.style.marginLeft=b.style.marginRight=(w*(sc-1)/2)+'px'}
   else{b.style.transform='';b.style.marginBottom=b.style.marginLeft=b.style.marginRight=''}
 }
@@ -240,7 +246,7 @@ document.querySelectorAll('.grip').forEach(function(g){
 window.addEventListener('resize',function(){if(fw===null){window.__apply(cap());mark(cap())}else{fit()}});
 mark(cap());fit();
 window.addEventListener('resize',fit);window.addEventListener('load',fit);
-if(window.ResizeObserver)new ResizeObserver(fit).observe(b);
+if(window.ResizeObserver&&!embed)new ResizeObserver(fit).observe(b);
 })();
 </script>
 </body>
