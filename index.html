@@ -12,7 +12,7 @@
 :root{--u:1vw;--blue:#459bdc;--ink:#111;--line:#e3e3e3;--bg:#fff;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *,*::before,*::after{box-sizing:inherit}
 html{display:flex;min-height:100vh;background:linear-gradient(135deg,#61C4ED 0%,#fff 100%);background-attachment:fixed;background-repeat:no-repeat;scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:auto;width:100%;display:flex;flex-direction:column;align-items:center;gap:0;padding:40px 0 104px;color:var(--ink);font-family:Inter,system-ui,sans-serif}
+body{margin:auto;width:100%;display:flex;flex-direction:column;align-items:center;gap:0;padding:40px 36px 104px;color:var(--ink);font-family:Inter,system-ui,sans-serif}
 .site{position:relative;width:1440px;max-width:100%;flex:none;display:flex;flex-direction:column;background:var(--bg)}
 main{flex:1;display:flex;flex-direction:column;min-height:0}
 .promo,.top,nav{flex:none}
@@ -89,24 +89,24 @@ html.tablet .search{order:2;width:44px;height:44px;border:0;padding:0;justify-co
 html.tablet .util{order:3;gap:6px}
 html.tablet .util a,html.tablet .burger{display:flex;align-items:center;justify-content:center;width:44px;height:44px}
 html.tablet .util a.hm{display:none}
-.bar .w{width:78px;flex:none;text-align:center;font-weight:600;padding:0 5px 0 8px}
-.grip{position:absolute;top:0;bottom:0;width:44px;z-index:60;cursor:ew-resize;touch-action:none;display:flex;align-items:center;justify-content:center}
-.grip.l{left:0}.grip.r{right:0}
+.bar .try{position:absolute;left:50%;bottom:calc(100% + 16px);transform:translateX(-50%);background:#fff;color:#009FE3;font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:17px;line-height:1;padding:10px 18px;border-radius:999px;white-space:nowrap;pointer-events:none;box-shadow:0 4px 14px rgba(0,0,0,.15);animation:tb 1.4s ease-in-out infinite}.bar .try::after{content:'';position:absolute;left:50%;top:100%;margin-left:-7px;border:7px solid transparent;border-top-color:#fff}@keyframes tb{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-4px)}}@media(prefers-reduced-motion:reduce){.bar .try{animation:none}}.bar .w{width:78px;flex:none;text-align:center;font-weight:600;padding:0 5px 0 8px}
+.grip{position:absolute;top:0;bottom:0;width:36px;z-index:60;cursor:ew-resize;touch-action:none;display:flex;align-items:center;justify-content:center}
+.grip.l{left:-36px}.grip.r{right:-36px}
 .grip i{display:block;width:14px;height:150px;border-radius:7px;background:#009FE3;box-shadow:0 0 0 2px #fff;transition:background .15s;animation:gp 1.6s ease-in-out 3}
 .grip:hover i,.grip.on i{background:#0079ad}
 .grip.seen i{animation:none}
 @keyframes gp{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.3);box-shadow:0 0 0 2px #fff,0 0 16px 6px rgba(0,159,227,.55)}}
 @media(prefers-reduced-motion:reduce){.grip i{animation:none}}
-html.phone .grip{width:22px}
+html.phone .grip{width:22px}html.phone .grip.l{left:-22px}html.phone .grip.r{right:-22px}
 html.phone .grip i{width:8px;height:90px}
-@media(pointer:coarse){.grip{display:none}}
+@media(pointer:coarse){.grip{display:none}body,body{padding-left:0!important;padding-right:0!important}}
 /* embed mode (inside an iframe): page height depends only on width, so auto-sizing iframes never feed back and shake */
 html.embed{overflow:hidden}
-@media(max-height:700px){body{padding:16px 0 66px}.bar{bottom:8px;padding:5px 12px;font-size:13.5px;gap:4px}.bar button{min-height:34px;padding-top:0;padding-bottom:0}.bar .w{width:66px}}
+@media(max-height:700px){body{padding:16px 36px 66px}.bar{bottom:8px;padding:5px 12px;font-size:13.5px;gap:4px}.bar button{min-height:34px;padding-top:0;padding-bottom:0}.bar .w{width:66px}}
 .bar button{flex:none;text-align:center;white-space:nowrap;padding-left:0;padding-right:0}.bar button[data-w="1440"]{width:92px}.bar button[data-w="820"]{width:82px}.bar button[data-w="390"]{width:78px}.bar #tour{width:92px}
-@media(max-width:760px){body{padding:20px 0 76px}.bar{bottom:14px}.bar{width:min(calc(100% - 32px),340px);flex-wrap:nowrap;gap:2px;padding:4px 8px;font-size:clamp(10px,3vw,13px)}.bar button{flex:1 1 auto;min-width:0;padding:6px clamp(3px,1vw,8px);min-height:34px;white-space:nowrap}.bar .w{width:3.8em;min-width:0;flex:none;padding:0}.bar button,.bar button[data-w]{flex:1 1 0;width:auto;min-width:0}.bar #tour{flex:1.2 1 0;padding:6px 2px}}
+@media(max-width:760px){body{padding:20px 36px 76px}.bar{bottom:14px}.bar{width:min(calc(100% - 32px),340px);flex-wrap:nowrap;gap:2px;padding:4px 8px;font-size:clamp(10px,3vw,13px)}.bar button{flex:1 1 auto;min-width:0;padding:6px clamp(3px,1vw,8px);min-height:34px;white-space:nowrap}.bar .w{width:3.8em;min-width:0;flex:none;padding:0}.bar button,.bar button[data-w]{flex:1 1 0;width:auto;min-width:0}.bar #tour{flex:1.2 1 0;padding:6px 2px}}
 </style>
-<script>(function(){var h=document.documentElement;try{if(window.self!==window.top||/[?&]embed=1/.test(location.search))h.classList.add('embed')}catch(e){h.classList.add('embed')}window.__apply=function(w){h.style.setProperty('--u',(w/100)+'px');h.classList.toggle('phone',w<=700);h.classList.toggle('tablet',w>700&&w<=1100)};window.__apply(Math.min(1440,innerWidth))})();
+<script>(function(){var h=document.documentElement;try{if(window.self!==window.top||/[?&]embed=1/.test(location.search))h.classList.add('embed')}catch(e){h.classList.add('embed')}window.__apply=function(w){h.style.setProperty('--u',(w/100)+'px');h.classList.toggle('phone',w<=700);h.classList.toggle('tablet',w>700&&w<=1100)};window.__g=matchMedia('(pointer:coarse)').matches?0:72;window.__apply(Math.min(1440,innerWidth-window.__g))})();
 </script>
 </head>
 <body>
@@ -143,7 +143,7 @@ html.embed{overflow:hidden}
 </main>
 <div class="grip l" title="Drag to resize"><i></i></div><div class="grip r" title="Drag to resize"><i></i></div>
 </div>
-<div class="bar" id="bar" role="toolbar" aria-label="Preview size"><span class="w" id="bd" aria-live="polite">1440px</span><button data-w="1440" class="on">Desktop</button><button data-w="820">Tablet</button><button data-w="390">Phone</button><button id="tour" aria-label="Play size tour">▶ Tour</button></div>
+<div class="bar" id="bar" role="toolbar" aria-label="Preview size"><span class="try" aria-hidden="true">Try out</span><span class="w" id="bd" aria-live="polite">1440px</span><button data-w="1440" class="on">Desktop</button><button data-w="820">Tablet</button><button data-w="390">Phone</button><button id="tour" aria-label="Play size tour">▶ Tour</button></div>
 <script>(function(){var v=document.getElementById('hv');if(!v)return;
 v.muted=true;v.defaultMuted=true;v.autoplay=true;v.loop=true;v.playsInline=true;
 v.setAttribute('muted','');v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');
@@ -179,7 +179,7 @@ v.addEventListener('playing',function(){if(swapped){swapped=false;f.hidden=true;
 <script>(function(){
 var MAX=1440,MIN=320,b=document.getElementById('site'),fw=null;
 var bar=document.getElementById('bar'),tb=document.getElementById('tour'),bd=document.getElementById('bd');
-function cap(){return Math.min(MAX,innerWidth)}
+function cap(){return Math.min(MAX,innerWidth-(window.__g||0))}
 function mark(w){
   bd.textContent=Math.round(w)+'px';
   bar.querySelectorAll('button[data-w]').forEach(function(x){
@@ -189,7 +189,7 @@ function mark(w){
 var sc=1,coarse=matchMedia('(pointer:coarse)').matches,embed=document.documentElement.classList.contains('embed'),lastH=0,fitH=0;
 function fit(){
   var cs=getComputedStyle(document.body),w=b.offsetWidth,h=b.offsetHeight;
-  var aw=innerWidth,ah=innerHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+  var aw=innerWidth-(window.__g||0),ah=innerHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
   sc=1;if(w>0)sc=Math.min(1,aw/w);if((!coarse||embed)&&h>0&&ah>60)sc=Math.min(sc,(ah-2)/h);
   b.style.transformOrigin='50% 0';
   sc=Math.round(sc*1000)/1000;
